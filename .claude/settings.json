@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm check *)",
+      "Bash(pnpm --version)",
+      "Bash(ls -t *)",
+      "Bash(ls -la *)",
+      "Bash(ls -l *)",
+      "Read(~/.claude/projects/**)"
+    ]
+  }
+}
