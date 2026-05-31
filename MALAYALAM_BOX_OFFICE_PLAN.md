@@ -11,7 +11,7 @@ A SvelteKit web app that automatically discovers new Malayalam movies, tracks th
 | Layer | Choice | Reason |
 |---|---|---|
 | Framework | SvelteKit 2 (adapter-node) | Server-side rendering + API routes |
-| ORM | Prisma | Same as reference project |
+| ORM | Zenstack | Same as reference project |
 | Database | PostgreSQL (Supabase) | Same as reference project |
 | Job Queue | pg-boss | Already available in reference project |
 | Styling | Tailwind CSS 4 | Same as reference project |
