@@ -1,3 +1,12 @@
+import { scheduleDiscoverMovies, registerDiscoverMoviesWorker } from './jobs/discover-movies.job';
+import {
+	scheduleSyncDailyCollections,
+	registerSyncDailyCollectionsWorker
+} from './jobs/sync-daily-collections.job';
+import {
+	scheduleSyncLiveCollections,
+	registerSyncLiveCollectionsWorker
+} from './jobs/sync-live-collections.job';
 import pgBoss from './pgBoss';
 
 export async function initializePgBossJobs() {
@@ -7,9 +16,13 @@ export async function initializePgBossJobs() {
 }
 
 async function schedulePgBossJobs() {
-	// Jobs registered here
+	await scheduleDiscoverMovies();
+	await scheduleSyncDailyCollections();
+	await scheduleSyncLiveCollections();
 }
 
 async function registerPgBossJobs() {
-	// Workers registered here
+	await registerDiscoverMoviesWorker();
+	await registerSyncDailyCollectionsWorker();
+	await registerSyncLiveCollectionsWorker();
 }
