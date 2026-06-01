@@ -1,0 +1,55 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+plugin enhancer {
+  provider = '@core/enhancer'
+}
+
+enum MovieStatus {
+  UPCOMING
+  RUNNING
+  COMPLETED
+}
+
+model Movie {
+  id            String      @id @default(cuid())
+  tmdbID        Int         @unique
+  title         String
+  originalTitle String
+  releaseDate   DateTime    @db.Date
+  posterURL     String?
+  backdropURL   String?
+  overview      String?
+  budget        Decimal?
+  sacnilkSlug   String?
+  status        MovieStatus @default(UPCOMING)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  collections   DailyCollection[]
+}
+
+model DailyCollection {
+  id         String   @id @default(cuid())
+  movieID    String
+  date       DateTime @db.Date
+  dayNumber  Int
+  kerala     Decimal?
+  india      Decimal?
+  worldwide  Decimal?
+  screens    Int?
+  source     String   @default("sacnilk")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  movie      Movie    @relation(fields: [movieID], references: [id], onDelete: Cascade)
+
+  @@unique([movieID, date])
+  @@index([movieID])
+}
